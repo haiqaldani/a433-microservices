@@ -1,0 +1,27 @@
+name: Build Karsajobs UI
+
+# Trigger the workflow when there is a push to the 'karsajobs-ui' branch
+on:
+  push:
+    branches:
+      - karsajobs-ui  # Only run workflow on this specific branch
+
+jobs:
+  build:
+    runs-on: ubuntu-latest  # Use the latest Ubuntu virtual environment
+
+    steps:
+      - name: Checkout repository  # Step to clone the repository code using the official GitHub action
+        uses: actions/checkout@v2
+
+      - name: Install and Run Hadolint   # Step to download and run Hadolint static analysis on the Dockerfile to check best practices
+        run: |
+          wget -O hadolint https://github.com/hadolint/hadolint/releases/latest/download/hadolint-Linux-x86_64
+          chmod +x hadolint
+          ./hadolint Dockerfile
+
+      - name: Build and Push Docker Image  # Step to build your Docker image and push it to a registry using the provided bash script
+        # Pass the GitHub Packages token as an environment variable securely accessed from GitHub Secrets
+        run: |
+          export PAT_GITHUB=${{ secrets.PAT_GITHUB }}
+          bash build_push_image_karsajobs_ui.sh
