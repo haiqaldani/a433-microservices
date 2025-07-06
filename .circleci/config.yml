@@ -28,7 +28,7 @@ jobs:
             bash build_push_image_karsajobs.sh
 
 workflows:
-  build-and-deploy:
+  backend:
     jobs:
       - build:
           filters:
