@@ -24,7 +24,7 @@ jobs:
             bash build_push_image_karsajobs_ui.sh
 
 workflows:
-  build-and-deploy:
+  frontend:
     jobs:
       - build:
           filters:
