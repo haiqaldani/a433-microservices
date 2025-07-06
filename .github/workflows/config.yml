@@ -1,0 +1,28 @@
+# Continuous Integration configuration for the Karsajobs project
+
+on:
+  push:
+    branches:
+      - karsajobs  # Trigger workflow when pushing to 'karsajobs' branch
+
+jobs:
+  build:
+    runs-on: ubuntu-latest  # Use the latest Ubuntu runner
+
+    steps:
+      - name: Checkout Repository  # Clone the repository code
+        uses: actions/checkout@v2
+
+      - name: Install and Run Hadolint  # Download and run Hadolint to check Dockerfile best practices
+        run: |
+          wget -O hadolint https://github.com/hadolint/hadolint/releases/latest/download/hadolint-Linux-x86_64
+          chmod +x hadolint
+          ./hadolint Dockerfile
+
+      - name: Run Unit Tests  # Run unit tests with verbose output and short mode
+        run: go test -v -short --count=1 $(go list ./...)
+
+      - name: Build and Push Docker Image  # Build Docker image and push using the provided script
+        run: |
+          export PAT_GITHUB=${{ secrets.PAT_GITHUB }}
+          bash build_push_image_karsajobs.sh
