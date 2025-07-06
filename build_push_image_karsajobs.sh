@@ -7,10 +7,9 @@ IMAGE_VERSION="lastest"
 
 # Login ke GitHub Container Registry (GitHub Packages)
 echo -e "Login ke GitHub Container Registry"
-echo "$PAT_GITHUB" | docker login ghcr.io -u "$USERNAME_GITHUB" --password-stdin
+docker login ghcr.io -u "$USERNAME_GITHUB" -p $PAT_GITHUB
 
 # Build image Docker backend
-
 echo -e "Build Image"
 docker build -t ghcr.io/$USERNAME_GITHUB/$IMAGE_NAME:$IMAGE_VERSION.
 
