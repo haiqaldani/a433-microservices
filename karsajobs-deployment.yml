@@ -14,7 +14,7 @@ spec:
     spec:
       containers:
         - name: backend
-          image: ghcr.io/haiqaldani/karsajobs:lastest
+          image: ghcr.io/haiqaldani/karsajobs:latest
           ports:
             - containerPort: 8080
           env:
