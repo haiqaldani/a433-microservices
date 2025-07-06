@@ -23,7 +23,7 @@ jobs:
       - run:
           name: Build and Push Docker Image
           environment:
-            PAT_GITHUB: << pipeline.parameters.GH_PACKAGES_TOKEN >>
+            PAT_GITHUB: << pipeline.parameters.PAT_GITHUB >>
           command: |
             bash build_push_image_karsajobs.sh
 
