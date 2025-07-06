@@ -3,7 +3,7 @@
 # Pengaturan user dan repository untuk GitHub Container Registry
 USERNAME_GITHUB="haiqaldani"
 IMAGE_NAME="karsajobs"
-IMAGE_VERSION="lastest"
+IMAGE_VERSION="latest"
 
 # Login ke GitHub Container Registry (GitHub Packages)
 echo -e "Login ke GitHub Container Registry"
