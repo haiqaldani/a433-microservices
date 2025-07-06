@@ -1,5 +1,6 @@
-# Continuous Integration configuration for the Karsajobs project
+name: Build Karsajobs
 
+# Continuous Integration configuration for the Karsajobs project
 on:
   push:
     branches:
@@ -23,6 +24,7 @@ jobs:
         run: go test -v -short --count=1 $(go list ./...)
 
       - name: Build and Push Docker Image  # Build Docker image and push using the provided script
+        # Pass the GitHub Packages token as an environment variable securely accessed from GitHub Secrets
         run: |
           export PAT_GITHUB=${{ secrets.PAT_GITHUB }}
           bash build_push_image_karsajobs.sh
