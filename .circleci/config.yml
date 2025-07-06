@@ -1,0 +1,36 @@
+version: 2.1
+
+jobs:
+  build:
+    docker:
+      - image: cimg/go:1.20  # Use an official CircleCI Go image with a suitable Go version
+    working_directory: ~/repo
+
+    steps:
+      - checkout
+
+      - run:
+          name: Install Hadolint
+          command: |
+            wget -O hadolint https://github.com/hadolint/hadolint/releases/latest/download/hadolint-Linux-x86_64
+            chmod +x hadolint
+            ./hadolint Dockerfile
+
+      - run:
+          name: Run Unit Tests
+          command: go test -v -short --count=1 $(go list ./...)
+
+      - run:
+          name: Build and Push Docker Image
+          environment:
+            GH_PACKAGES_TOKEN: << pipeline.parameters.GH_PACKAGES_TOKEN >>
+          command: |
+            bash build_push_image_karsajobs.sh
+
+workflows:
+  build-and-deploy:
+    jobs:
+      - build:
+          filters:
+            branches:
+              only: karsajobs
