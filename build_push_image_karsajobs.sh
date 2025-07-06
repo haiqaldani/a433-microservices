@@ -11,8 +11,8 @@ docker login ghcr.io -u "$USERNAME_GITHUB" -p $PAT_GITHUB
 
 # Build image Docker backend
 echo -e "Build Image"
-docker build -t ghcr.io/$USERNAME_GITHUB/$IMAGE_NAME:$IMAGE_VERSION.
+docker build -t ghcr.io/$USERNAME_GITHUB/$IMAGE_NAME:$IMAGE_VERSION .
 
 # Push image ke GitHub Container Registry
 echo -e "Push Image ke Github"
-docker push ghcr.io/$USERNAME_GITHUB/$IMAGE_NAME:$IMAGE_VERSION.
+docker push ghcr.io/$USERNAME_GITHUB/$IMAGE_NAME:$IMAGE_VERSION
