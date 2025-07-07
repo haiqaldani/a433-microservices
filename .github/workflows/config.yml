@@ -18,8 +18,8 @@ jobs:
           chmod +x hadolint
           ./hadolint ./Dockerfile
 
-      - name: Build and Push Shipping Service Docker Image
+      - name: Build and Push Shipping Service Docker Image 
         env:
           PAT_GITHUB: ${{ secrets.PAT_GITHUB }}
         run: |
-          bash ./shipping-service/build_push_image_shipping.sh
+          bash ./build_push_image_shipping.sh
