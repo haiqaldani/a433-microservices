@@ -2,7 +2,7 @@
 FROM node:16-alpine
 
 # Set working directory
-WORKDIR /app
+WORKDIR /src
 
 # Copy package.json dan package-lock.json (atau yarn.lock)
 COPY package*.json ./
