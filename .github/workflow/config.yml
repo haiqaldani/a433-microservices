@@ -1,0 +1,25 @@
+name: Build Order Service
+
+on:
+  push:
+    branches:
+      - order-service 
+
+jobs:
+  build-order-service:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v2
+
+      - name: Install and Run Hadolint on Order Service Dockerfile
+        run: |
+          wget -O hadolint https://github.com/hadolint/hadolint/releases/latest/download/hadolint-Linux-x86_64
+          chmod +x hadolint
+          ./hadolint ./order-service/Dockerfile
+
+      - name: Build and Push Order Service Docker Image
+        env:
+          PAT_GITHUB: ${{ secrets.PAT_GITHUB }}
+        run: |
+          bash ./order-service/build_push_image_order.sh
