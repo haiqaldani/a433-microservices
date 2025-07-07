@@ -1,7 +1,7 @@
 # Gunakan base image node js minimal
 FROM node:16-alpine
 
-WORKDIR /app
+WORKDIR /src
 
 COPY package*.json ./
 RUN npm install --production
