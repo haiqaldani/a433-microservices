@@ -1,0 +1,25 @@
+name: Build Shipping Service
+
+on:
+  push:
+    branches:
+      - shipping-service 
+
+jobs:
+  build-shipping-service:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v2
+
+      - name: Install and Run Hadolint on Shipping Service Dockerfile
+        run: |
+          wget -O hadolint https://github.com/hadolint/hadolint/releases/latest/download/hadolint-Linux-x86_64
+          chmod +x hadolint
+          ./hadolint ./shipping-service/Dockerfile
+
+      - name: Build and Push Shipping Service Docker Image
+        env:
+          PAT_GITHUB: ${{ secrets.PAT_GITHUB }}
+        run: |
+          bash ./shipping-service/build_push_image_shipping.sh
