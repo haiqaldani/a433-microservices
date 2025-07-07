@@ -22,4 +22,4 @@ jobs:
         env:
           PAT_GITHUB: ${{ secrets.PAT_GITHUB }}
         run: |
-          bash ./order-service/build_push_image_order.sh
+          bash ./build_push_image_order.sh
