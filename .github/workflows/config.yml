@@ -16,7 +16,7 @@ jobs:
         run: |
           wget -O hadolint https://github.com/hadolint/hadolint/releases/latest/download/hadolint-Linux-x86_64
           chmod +x hadolint
-          ./hadolint ./order-service/Dockerfile
+          ./hadolint ./Dockerfile
 
       - name: Build and Push Order Service Docker Image
         env:
